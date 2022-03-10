@@ -1,0 +1,353 @@
+openapi: 3.0.1
+info:
+  description: "This is an API for a cinema website"
+  version: "1.0.0"
+  title: "cinema-api"
+  termsOfService: "http://swagger.io/terms"
+  contact:
+    email: "ram.huels@gmail.com"
+paths:
+  /homepage:
+    post:
+      tags:
+        - homepage
+      summary: Provides information for homepage
+      description: "Provides info for all shows in the next week"
+      operationId: homepagePost
+      responses:
+          '200':
+            description: Homepage information has been delivered
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/HomepageTO'
+  /login:
+    post:
+      tags:
+        - login
+      summary: Login
+      description: "Api for the login of user and admin"
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginTO'
+      responses:
+        '200':
+          description: Login was successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+                description: Is the user an admin
+        '404':
+          description: Username or password is wrong
+  /user/{userId}:
+    post:
+      tags:
+        - user
+      summary: Provides information for user
+      description: "Provides all tickets of an user"
+      operationId: userPost
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: Id of the user
+      responses:
+        '200':
+          description: Information for user has been delivered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTO'
+        '404':
+          description: No User has been found for this Id
+  /cancelTicket/{showId}:
+    delete:
+      tags:
+        - user
+      summary: Deletes ticket
+      description: "Deletes a ticket"
+      operationId: cancelTicketDelete
+      parameters:
+        - in: path
+          name: showId
+          schema:
+            type: integer
+          required: true
+          description: Id of the show
+      responses:
+        '200':
+          description: The ticket has been canceled
+        '404':
+          description: No ticket has been found for this ticket
+  /bookTicket:
+    put:
+      tags:
+        - booking
+      summary: Puts a ticket
+      description: "Booking a ticket"
+      operationId: bookingTicket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketPushTO'
+      responses:
+        '200':
+          description: Ticket has been booked
+        '404':
+          description: Tickets could not be booked
+  /bookTicketInformation/{showId}:
+    post:
+      tags:
+        - booking
+      summary: Information of movie
+      description: "Shows information for booking a ticket"
+      operationId: bookingInfo
+      parameters:
+        - in: path
+          name: showId
+          schema:
+            type: integer
+          required: true
+          description: Id of the show
+      responses:
+        '200':
+          description: A show has been found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingTO'
+        '404':
+          description: No show has been found for this id
+  /getTicketprice:
+    post:
+      tags:
+        - booking
+      summary: Gets price for a ticket
+      description: "Gets the price this specific ticket would cost"
+      operationId: bookingPrice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketPushTO'
+      responses:
+        '200':
+          description: The price could be calculated
+          content:
+            application/json:
+              schema:
+                type: integer
+                description: Price for the ticket
+        '404':
+          description: The price could not be calculated
+  /putMovie/{moviename}:
+    put:
+      tags:
+        - admin
+      summary: Puts a movie
+      description: "Saves a new movie"
+      operationId: putMovie
+      parameters:
+        - in: path
+          name: moviename
+          schema:
+            type: string
+          required: true
+          description: Name of the new movie
+      responses:
+        '200':
+          description: New movie has been saved
+        '404':
+          description: New movie could not be saved
+  /putShow:
+    put:
+      tags:
+        - admin
+      summary: Puts a show
+      description: "Saves a new show"
+      operationId: putShow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShowPushTO'
+      responses:
+        '200':
+          description: Show has been saved
+        '404':
+          description: Could not save show
+  /getMovies:
+    post:
+      tags: 
+        - admin
+      summary: Gets movies
+      description: "Gets all movies"
+      operationId: getMovies
+      responses:
+        '200':
+          description: All movies have been delivered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllMoviesTO'
+        '404':
+          description: Could not find any movies
+  /getCinema:
+    post:
+      tags:
+        - admin
+      summary: Gets cinema halls
+      description: "Gets all cinema halls"
+      operationId: getCinema
+      responses:
+        '200':
+          description: All cinema halls have been delivered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CinemaTO'
+        '404':
+          description: Could not find any cinemas
+components:
+  schemas:
+    HomepageTO:
+      type: object
+      properties:
+        movieList:
+          type: array
+          description: A list of movies
+          items:
+            $ref: '#/components/schemas/MovieListTO'
+    MovieListTO:
+      type: object
+      properties:
+        movieTitle:
+          type: string
+          description: Title of the movie
+        allShowsOfTheDay:
+          type: array
+          description: A list with the programm for a day of the week of specific movie
+          items:
+            $ref: '#/components/schemas/DayTO'
+    DayTO:
+      type: object
+      properties:
+        shows:
+          type: array
+          description: A list of every show for the day
+          items:
+            $ref: '#/components/schemas/ShowTO'
+    ShowTO:
+      type: object
+      properties:
+        showId:
+          type: integer
+          description: Id of the show
+        time:
+          type: string
+          description: Time the show occurs
+    UserTO:
+      type: object
+      properties:
+        username:
+          type: integer
+          description: Id of the user
+        tickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketTO'
+    TicketTO:
+      type: object
+      properties:
+        showId:
+          type: integer 
+          description: Id of the show
+        time: 
+          type: string
+          description: Time the show occurs
+        moviename:
+          type: string
+          description: Name of the movie
+    BookingTO:
+      type: object
+      properties:
+        moviename:
+          type: string
+          description: Name of the movie
+        time:
+          type: string
+          description: Time of the show
+        is3D:
+          type: boolean
+          description: Is the show in 3D?
+    TicketPushTO:
+      type: object
+      properties:
+        showId:
+          type: integer
+          description: Id of the show
+        withDiscount:
+          type: boolean
+          description: Is this ticket booked with a discount
+        isBosSeat:
+          type: boolean
+          description: Is this ticket for a boxseat
+    AllMoviesTO:
+      type: object
+      properties:
+        movieList:
+          type: array
+          description: List of all movies
+          items:
+            $ref: '#/components/schemas/MovieTO'
+    MovieTO:
+      type: object
+      properties:
+        moviename:
+          type: string
+          description: Name of the movie
+        movieId:
+          type: integer
+          description: Id of the movie
+    CinemaTO:
+      type: object
+      properties:
+        hallList:
+          type: array
+          description: List of all cinema halls
+          items:
+            type: integer
+            description: Id of the hall
+            example: [1, 2, 3, 4]
+    ShowPushTO:
+      type: object
+      properties:
+        movieId:
+          type: integer
+          description: Id of the movie
+        cinemaId:
+          type: integer
+          description: Id of the cinema hall
+        is3D:
+          type: boolean
+          description: Is the show in 3D?
+        time:
+          type: string
+          format: date
+          description: Date of the show
+    LoginTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Name of the user
+        password:
+          type: string
+          description: Passwort of the user
