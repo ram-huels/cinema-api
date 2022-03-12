@@ -2,6 +2,7 @@ package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.project.cinemaapi.generated.model.HomepageTO;
+import de.project.cinemaapi.services.HomepageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,15 @@ public class HomepageApiController implements HomepageApi {
 
     private static final Logger log = LoggerFactory.getLogger(HomepageApiController.class);
 
+    private HomepageService homepageService;
+
     @Autowired
-    public HomepageApiController() {}
+    public HomepageApiController(HomepageService homepageService) {
+        this.homepageService = homepageService;
+    }
 
     public ResponseEntity<HomepageTO> homepagePost() {
-        return new ResponseEntity<HomepageTO>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(homepageService.createHomepageData());
     }
 
 }

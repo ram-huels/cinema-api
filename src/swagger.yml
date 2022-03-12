@@ -323,9 +323,7 @@ components:
           type: array
           description: List of all cinema halls
           items:
-            type: integer
-            description: Id of the hall
-            example: [1, 2, 3, 4]
+            $ref: '#/components/schemas/HallTO'
     ShowPushTO:
       type: object
       properties:
@@ -351,3 +349,15 @@ components:
         password:
           type: string
           description: Passwort of the user
+    HallTO:
+      type: object
+      properties:
+        cinemaHallId:
+          type: integer
+          description: Id of the cinema hall
+        boxSeats:
+          type: integer
+          description: Number of box seats
+        parquetSeats:
+          type: integer
+          description: Number of parquet seats
