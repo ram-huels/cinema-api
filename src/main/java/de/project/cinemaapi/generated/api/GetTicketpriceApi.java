@@ -34,7 +34,7 @@ public interface GetTicketpriceApi {
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Integer> bookingPrice(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody TicketPushTO body);
+    ResponseEntity<Double> bookingPrice(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody TicketPushTO body);
 
 }
 

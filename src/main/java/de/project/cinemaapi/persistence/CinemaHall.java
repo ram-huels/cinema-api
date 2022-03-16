@@ -24,6 +24,12 @@ public class CinemaHall {
 
     }
 
+    public CinemaHall(int k_id, int logenplaetze, int parkettplaetze) {
+        cinemaHallId = k_id;
+        boxSeats = logenplaetze;
+        parquetSeats = parkettplaetze;
+    }
+
     public int getCinemaHallId() {
         return cinemaHallId;
     }

@@ -1,6 +1,6 @@
 package de.project.cinemaapi.generated.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,7 +25,7 @@ public class ShowPushTO   {
   private Boolean is3D = null;
 
   @JsonProperty("time")
-  private LocalDate time = null;
+  private LocalDateTime time = null;
 
   public ShowPushTO movieId(Integer movieId) {
     this.movieId = movieId;
@@ -84,7 +84,7 @@ public class ShowPushTO   {
     this.is3D = is3D;
   }
 
-  public ShowPushTO time(LocalDate time) {
+  public ShowPushTO time(LocalDateTime time) {
     this.time = time;
     return this;
   }
@@ -96,11 +96,11 @@ public class ShowPushTO   {
   @Schema(description = "Date of the show")
   
     @Valid
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
     return time;
   }
 
-  public void setTime(LocalDate time) {
+  public void setTime(LocalDateTime time) {
     this.time = time;
   }
 

@@ -1,11 +1,9 @@
 package de.project.cinemaapi.generated.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.project.cinemaapi.generated.model.CinemaTO;
+import de.project.cinemaapi.services.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,11 +15,14 @@ public class GetCinemaApiController implements GetCinemaApi {
 
     private static final Logger log = LoggerFactory.getLogger(GetCinemaApiController.class);
 
-    @Autowired
-    public GetCinemaApiController() {}
+    private AdminService adminService;
+
+    public GetCinemaApiController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     public ResponseEntity<CinemaTO> getCinema() {
-        return new ResponseEntity<CinemaTO>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(adminService.getAllCinemaHalls());
     }
 
 }

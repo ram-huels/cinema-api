@@ -1,6 +1,7 @@
 package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.project.cinemaapi.services.AdminService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,11 +21,15 @@ public class PutMovieApiController implements PutMovieApi {
 
     private static final Logger log = LoggerFactory.getLogger(PutMovieApiController.class);
 
-    @Autowired
-    public PutMovieApiController() {}
+    private final AdminService adminService;
+
+    public PutMovieApiController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     public ResponseEntity<Void> putMovie(@Parameter(in = ParameterIn.PATH, description = "Name of the new movie", required=true, schema=@Schema()) @PathVariable("moviename") String moviename) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        adminService.saveMovie(moviename);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
 }

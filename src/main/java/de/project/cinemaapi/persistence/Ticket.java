@@ -9,8 +9,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Price price;
+    @Column
+    private double price;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Show show;
@@ -21,7 +21,7 @@ public class Ticket {
     @Column
     private boolean boxSeat;
 
-    public Ticket(Price price, Show show, User user, boolean boxSeat) {
+    public Ticket(int price, Show show, User user, boolean boxSeat) {
         this.price = price;
         this.show = show;
         this.user = user;
@@ -40,11 +40,11 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
-    public Price getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Price price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

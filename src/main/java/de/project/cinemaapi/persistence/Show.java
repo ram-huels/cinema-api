@@ -29,6 +29,14 @@ public class Show {
         this.startTime = startTime;
     }
 
+    public Show(int showId, CinemaHall cinemaHall, Movie movie, boolean is3D, LocalDateTime startTime) {
+        this.showId = showId;
+        this.cinemaHall = cinemaHall;
+        this.movie = movie;
+        this.is3D = is3D;
+        this.startTime = startTime;
+    }
+
     public Show() {
 
     }

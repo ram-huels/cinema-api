@@ -19,8 +19,11 @@ public class TicketPushTO   {
   @JsonProperty("withDiscount")
   private Boolean withDiscount = null;
 
-  @JsonProperty("isBosSeat")
-  private Boolean isBosSeat = null;
+  @JsonProperty("isBoxSeat")
+  private Boolean isBoxSeat = null;
+
+  @JsonProperty("userId")
+  private Integer userId = null;
 
   public TicketPushTO showId(Integer showId) {
     this.showId = showId;
@@ -32,8 +35,8 @@ public class TicketPushTO   {
    * @return showId
    **/
   @Schema(description = "Id of the show")
-  
-    public Integer getShowId() {
+
+  public Integer getShowId() {
     return showId;
   }
 
@@ -51,8 +54,8 @@ public class TicketPushTO   {
    * @return withDiscount
    **/
   @Schema(description = "Is this ticket booked with a discount")
-  
-    public Boolean isWithDiscount() {
+
+  public Boolean isWithDiscount() {
     return withDiscount;
   }
 
@@ -60,23 +63,42 @@ public class TicketPushTO   {
     this.withDiscount = withDiscount;
   }
 
-  public TicketPushTO isBosSeat(Boolean isBosSeat) {
-    this.isBosSeat = isBosSeat;
+  public TicketPushTO isBoxSeat(Boolean isBoxSeat) {
+    this.isBoxSeat = isBoxSeat;
     return this;
   }
 
   /**
    * Is this ticket for a boxseat
-   * @return isBosSeat
+   * @return isBoxSeat
    **/
   @Schema(description = "Is this ticket for a boxseat")
-  
-    public Boolean isIsBosSeat() {
-    return isBosSeat;
+
+  public Boolean isIsBoxSeat() {
+    return isBoxSeat;
   }
 
-  public void setIsBosSeat(Boolean isBosSeat) {
-    this.isBosSeat = isBosSeat;
+  public void setIsBoxSeat(Boolean isBoxSeat) {
+    this.isBoxSeat = isBoxSeat;
+  }
+
+  public TicketPushTO userId(Integer userId) {
+    this.userId = userId;
+    return this;
+  }
+
+  /**
+   * Id of the user
+   * @return userId
+   **/
+  @Schema(description = "Id of the user")
+
+  public Integer getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
 
@@ -90,23 +112,25 @@ public class TicketPushTO   {
     }
     TicketPushTO ticketPushTO = (TicketPushTO) o;
     return Objects.equals(this.showId, ticketPushTO.showId) &&
-        Objects.equals(this.withDiscount, ticketPushTO.withDiscount) &&
-        Objects.equals(this.isBosSeat, ticketPushTO.isBosSeat);
+            Objects.equals(this.withDiscount, ticketPushTO.withDiscount) &&
+            Objects.equals(this.isBoxSeat, ticketPushTO.isBoxSeat) &&
+            Objects.equals(this.userId, ticketPushTO.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(showId, withDiscount, isBosSeat);
+    return Objects.hash(showId, withDiscount, isBoxSeat, userId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TicketPushTO {\n");
-    
+
     sb.append("    showId: ").append(toIndentedString(showId)).append("\n");
     sb.append("    withDiscount: ").append(toIndentedString(withDiscount)).append("\n");
-    sb.append("    isBosSeat: ").append(toIndentedString(isBosSeat)).append("\n");
+    sb.append("    isBoxSeat: ").append(toIndentedString(isBoxSeat)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

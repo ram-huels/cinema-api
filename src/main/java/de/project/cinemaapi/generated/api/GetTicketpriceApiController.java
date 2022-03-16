@@ -2,6 +2,7 @@ package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.project.cinemaapi.generated.model.TicketPushTO;
+import de.project.cinemaapi.services.BookingService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,11 +23,14 @@ public class GetTicketpriceApiController implements GetTicketpriceApi {
 
     private static final Logger log = LoggerFactory.getLogger(GetTicketpriceApiController.class);
 
-    @Autowired
-    public GetTicketpriceApiController() {}
+    private final BookingService bookingService;
 
-    public ResponseEntity<Integer> bookingPrice(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody TicketPushTO body) {
-        return new ResponseEntity<Integer>(HttpStatus.NOT_IMPLEMENTED);
+    public GetTicketpriceApiController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    public ResponseEntity<Double> bookingPrice(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody TicketPushTO body) {
+        return ResponseEntity.ok(bookingService.getTicketPrice(body));
     }
 
 }

@@ -2,6 +2,7 @@ package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.project.cinemaapi.generated.model.AllMoviesTO;
+import de.project.cinemaapi.services.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,14 @@ public class GetMoviesApiController implements GetMoviesApi {
 
     private static final Logger log = LoggerFactory.getLogger(GetMoviesApiController.class);
 
-    @Autowired
-    public GetMoviesApiController() {}
+    private final AdminService adminService;
+
+    public GetMoviesApiController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     public ResponseEntity<AllMoviesTO> getMovies() {
-        return new ResponseEntity<AllMoviesTO>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(adminService.getAllMovies());
     }
 
 }

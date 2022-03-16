@@ -2,6 +2,7 @@ package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.project.cinemaapi.generated.model.ShowPushTO;
+import de.project.cinemaapi.services.AdminService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,10 +23,14 @@ public class PutShowApiController implements PutShowApi {
 
     private static final Logger log = LoggerFactory.getLogger(PutShowApiController.class);
 
-    @Autowired
-    public PutShowApiController() {}
+    private final AdminService adminService;
+
+    public PutShowApiController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     public ResponseEntity<Void> putShow(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody ShowPushTO body) {
+        adminService.saveShow(body);
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
