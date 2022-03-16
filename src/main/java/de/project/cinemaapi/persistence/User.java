@@ -7,8 +7,9 @@ import javax.persistence.*;
 @Entity
 public class User {
 
+    private static int id = 0;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     @Column
@@ -21,13 +22,22 @@ public class User {
     private boolean isAdmin;
 
     public User(String userName, String password, boolean isAdmin) {
+        this.userId = id;
+        this.userName = userName;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        id++;
+    }
+
+    public User(int userId, String userName, String password, boolean isAdmin) {
+        this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.isAdmin = isAdmin;
     }
 
     public User() {
-
+        id++;
     }
 
     public int getUserId() {

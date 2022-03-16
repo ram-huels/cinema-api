@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 public class Movie {
 
+    private static int id = 0;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieId;
 
     @Column
@@ -14,10 +15,12 @@ public class Movie {
 
     public Movie(String movieName) {
         this.movieName = movieName;
+        this.movieId = id;
+        id++;
     }
 
     public Movie() {
-
+        id++;
     }
 
     public Movie(int f_id, String name) {

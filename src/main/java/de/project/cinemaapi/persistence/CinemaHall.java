@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 public class CinemaHall {
 
+    private static int id = 0;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cinemaHallId;
 
     @Column
@@ -16,12 +17,14 @@ public class CinemaHall {
     private int parquetSeats;
 
     public CinemaHall(int boxSeats, int parquetSeats) {
+        this.cinemaHallId = id;
         this.boxSeats = boxSeats;
         this.parquetSeats = parquetSeats;
+        id++;
     }
 
     public CinemaHall() {
-
+        id++;
     }
 
     public CinemaHall(int k_id, int logenplaetze, int parkettplaetze) {

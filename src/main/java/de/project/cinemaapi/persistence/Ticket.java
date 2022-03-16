@@ -5,31 +5,34 @@ import javax.persistence.*;
 @Entity
 public class Ticket {
 
+    private static int id = 0;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
 
     @Column
     private double price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Show.class)
     private Show show;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
     private User user;
 
     @Column
     private boolean boxSeat;
 
-    public Ticket(int price, Show show, User user, boolean boxSeat) {
+    public Ticket(double price, Show show, User user, boolean boxSeat) {
+        this.ticketId = id;
         this.price = price;
         this.show = show;
         this.user = user;
         this.boxSeat = boxSeat;
+        id++;
     }
 
     public Ticket() {
-
+        id++;
     }
 
     public int getTicketId() {

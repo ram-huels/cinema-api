@@ -1,6 +1,7 @@
 package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.project.cinemaapi.services.BookingService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,11 +21,15 @@ public class CancelTicketApiController implements CancelTicketApi {
 
     private static final Logger log = LoggerFactory.getLogger(CancelTicketApiController.class);
 
-    @Autowired
-    public CancelTicketApiController() {}
+    private final BookingService bookingService;
+
+    public CancelTicketApiController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
 
     public ResponseEntity<Void> cancelTicketDelete(@Parameter(in = ParameterIn.PATH, description = "Id of the show", required=true, schema=@Schema()) @PathVariable("showId") Integer showId) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        this.bookingService.cancelTicket(showId);
+        return ResponseEntity.ok().build();
     }
 
 }

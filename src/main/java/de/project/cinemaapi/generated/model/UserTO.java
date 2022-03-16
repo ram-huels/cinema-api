@@ -15,13 +15,13 @@ import javax.validation.Valid;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-03-10T12:00:26.623Z[GMT]")
 public class UserTO   {
   @JsonProperty("username")
-  private Integer username = null;
+  private String username = null;
 
   @JsonProperty("tickets")
   @Valid
   private List<TicketTO> tickets = null;
 
-  public UserTO username(Integer username) {
+  public UserTO username(String username) {
     this.username = username;
     return this;
   }
@@ -32,11 +32,11 @@ public class UserTO   {
    **/
   @Schema(description = "Id of the user")
   
-    public Integer getUsername() {
+    public String getUsername() {
     return username;
   }
 
-  public void setUsername(Integer username) {
+  public void setUsername(String username) {
     this.username = username;
   }
 

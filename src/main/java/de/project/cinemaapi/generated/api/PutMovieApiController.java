@@ -29,7 +29,7 @@ public class PutMovieApiController implements PutMovieApi {
 
     public ResponseEntity<Void> putMovie(@Parameter(in = ParameterIn.PATH, description = "Name of the new movie", required=true, schema=@Schema()) @PathVariable("moviename") String moviename) {
         adminService.saveMovie(moviename);
-        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+        return ResponseEntity.ok().build();
     }
 
 }

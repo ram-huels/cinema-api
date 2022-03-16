@@ -2,6 +2,7 @@ package de.project.cinemaapi.generated.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.project.cinemaapi.generated.model.LoginTO;
+import de.project.cinemaapi.services.UserService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,11 +23,14 @@ public class LoginApiController implements LoginApi {
 
     private static final Logger log = LoggerFactory.getLogger(LoginApiController.class);
 
-    @Autowired
-    public LoginApiController() {}
+    private final UserService userService;
+
+    public LoginApiController(UserService userService) {
+        this.userService = userService;
+    }
 
     public ResponseEntity<Boolean> login(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody LoginTO body) {
-        return new ResponseEntity<Boolean>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(userService.checkLogin(body));
     }
 
 }

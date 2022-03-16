@@ -46,7 +46,7 @@ public class ShowRepository {
     public Show getShow(Integer id) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:kino.db");
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vorstellung WHERE V_ID = ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vorstellungen WHERE V_ID = ?");
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
@@ -54,7 +54,7 @@ public class ShowRepository {
 
             while (rs.next()) {
                 show = new Show(id, cinemaHallRepository.getCinemaHall(rs.getInt("K_ID")), movieRepository.getMovie(rs.getInt("F_ID")),
-                        intToBoolean(rs.getInt("is3D")), LocalDateTime.parse(rs.getString("Startpunkt")));
+                        intToBoolean(rs.getInt("is3D")), LocalDateTime.parse(rs.getString("Startzeit")));
             }
 
             rs.close();
@@ -71,9 +71,9 @@ public class ShowRepository {
     public List<Show> getShowsOnTheDay(LocalDateTime withNeededDay, int movieId) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:kino.db");
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vorstellung WHERE F_ID = ? AND Startzeit LIKE ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vorstellungen WHERE F_ID = ? AND Startzeit LIKE ?");
             statement.setInt(1, movieId);
-            statement.setString(2, withNeededDay.toString().substring(0, 9) + "%");
+            statement.setString(2, withNeededDay.toString().substring(0, 10) + "%");
             ResultSet rs = statement.executeQuery();
 
             List<Show> showList = new ArrayList<>();
@@ -81,7 +81,7 @@ public class ShowRepository {
 
             while (rs.next()) {
                 show = new Show(rs.getInt("V_ID"), cinemaHallRepository.getCinemaHall(rs.getInt("K_ID")), movieRepository.getMovie(rs.getInt("F_ID")),
-                        intToBoolean(rs.getInt("is3D")), LocalDateTime.parse(rs.getString("Startpunkt")));
+                        intToBoolean(rs.getInt("is3D")), LocalDateTime.parse(rs.getString("Startzeit")));
                 showList.add(show);
             }
 
@@ -96,6 +96,9 @@ public class ShowRepository {
         return null;
     }
 
+    /*
+    Hilfsfunktionen
+     */
     private int booleanToInt(boolean data) {
         if (data) {
             return 1;

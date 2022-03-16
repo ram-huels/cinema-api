@@ -52,6 +52,9 @@ public class HomepageService {
     }
 
     public DayTO mapToDayTO(List<Show> showsOfTheDay) {
+        if (showsOfTheDay == null) {
+            return null;
+        }
         List<ShowTO> showTOList = new ArrayList<>();
         for (Show show: showsOfTheDay) {
             ShowTO showTO = new ShowTO();

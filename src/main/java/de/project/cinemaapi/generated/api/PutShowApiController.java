@@ -31,7 +31,7 @@ public class PutShowApiController implements PutShowApi {
 
     public ResponseEntity<Void> putShow(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody ShowPushTO body) {
         adminService.saveShow(body);
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok().build();
     }
 
 }

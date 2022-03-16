@@ -5,7 +5,6 @@ import de.project.cinemaapi.data.TicketRepository;
 import de.project.cinemaapi.data.UserRepository;
 import de.project.cinemaapi.generated.model.BookingTO;
 import de.project.cinemaapi.generated.model.TicketPushTO;
-import de.project.cinemaapi.persistence.Price;
 import de.project.cinemaapi.persistence.Show;
 import de.project.cinemaapi.persistence.Ticket;
 import org.springframework.stereotype.Service;
@@ -36,6 +35,10 @@ public class BookingService {
     public double getTicketPrice(TicketPushTO ticketPushTO) {
         Show show = showRepository.getShow(ticketPushTO.getShowId());
         return this.calculatePrice(ticketPushTO.isWithDiscount(), ticketPushTO.isIsBoxSeat(), show.isIs3D());
+    }
+
+    public void cancelTicket(int id) {
+        this.ticketRepository.cancelTicket(id);
     }
 
     /*

@@ -18,7 +18,7 @@ public class CinemaHallRepository {
     public CinemaHall getCinemaHall(Integer id) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:kino.db");
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Kinosall WHERE K_ID = ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Kinosaal WHERE K_ID = ?");
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
@@ -63,9 +63,5 @@ public class CinemaHallRepository {
             System.out.println(ex.toString());
         }
         return Collections.emptyList();
-    }
-
-    public CinemaHall getCinemaHall(int id) {
-        return new CinemaHall();
     }
 }

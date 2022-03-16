@@ -6,14 +6,15 @@ import java.time.LocalDateTime;
 @Entity
 public class Show {
 
+    private static int id = 0;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int showId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = CinemaHall.class)
     private CinemaHall cinemaHall;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Movie.class)
     private Movie movie;
 
     @Column
@@ -23,10 +24,12 @@ public class Show {
     private LocalDateTime startTime;
 
     public Show(CinemaHall cinemaHall, Movie movie, boolean is3D, LocalDateTime startTime) {
+        this.showId = id;
         this.cinemaHall = cinemaHall;
         this.movie = movie;
         this.is3D = is3D;
         this.startTime = startTime;
+        id++;
     }
 
     public Show(int showId, CinemaHall cinemaHall, Movie movie, boolean is3D, LocalDateTime startTime) {
@@ -38,7 +41,7 @@ public class Show {
     }
 
     public Show() {
-
+        id++;
     }
 
     public int getShowId() {

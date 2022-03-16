@@ -23,8 +23,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     @RequestMapping(value = "/")
     public String index() {
-        System.out.println("/swagger-ui/index.html");
-        return "redirect:/swagger-ui/";
+        return "redirect:/swagger-ui.html";
     }
 
     @Bean
@@ -34,7 +33,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .apis(RequestHandlerSelectors.basePackage("io.swagger.api"))
                 .build()
                 .directModelSubstitute(java.time.LocalDate.class, java.sql.Date.class)
-                .directModelSubstitute(java.time.LocalDateTime.class, java.util.Date.class)
+                .directModelSubstitute(java.time.LocalDateTime.class, java.sql.Date.class)
                 .apiInfo(apiInfo());
     }
 
@@ -46,7 +45,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .licenseUrl("http://unlicense.org")
                 .termsOfServiceUrl("")
                 .version("1.0.0")
-                .contact(new Contact("","", "ram.huels@gmail.com"))
+                .contact(new Contact("Ramon Hüls","", "ram.huels@gmail.com"))
                 .build();
     }
 
