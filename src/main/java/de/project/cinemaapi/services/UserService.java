@@ -2,6 +2,7 @@ package de.project.cinemaapi.services;
 
 import de.project.cinemaapi.data.TicketRepository;
 import de.project.cinemaapi.data.UserRepository;
+import de.project.cinemaapi.generated.model.LoginResponseTO;
 import de.project.cinemaapi.generated.model.LoginTO;
 import de.project.cinemaapi.generated.model.TicketTO;
 import de.project.cinemaapi.generated.model.UserTO;
@@ -31,8 +32,17 @@ public class UserService {
         return userTO;
     }
 
-    public boolean checkLogin(LoginTO body) {
-        return userRepository.checkLogin(body.getUsername(), body.getPassword());
+    public LoginResponseTO checkLogin(LoginTO body) {
+        LoginResponseTO loginResponseTO = new LoginResponseTO();
+        User user = userRepository.getUserViaLoginInformation(body.getUsername(), body.getPassword());
+        if (user == null) {
+            loginResponseTO.isAdmin(false);
+            loginResponseTO.isCorrect(false);
+            return loginResponseTO;
+        }
+        loginResponseTO.setIsCorrect(true);
+        loginResponseTO.setIsAdmin(user.isAdmin());
+        return loginResponseTO;
     }
 
     /*
@@ -43,7 +53,9 @@ public class UserService {
         for (Ticket ticket: ticketList) {
             TicketTO ticketTO = new TicketTO();
             ticketTO.setShowId(ticket.getShow().getShowId());
+            ticketTO.setTicketId(ticket.getTicketId());
             ticketTO.setMoviename(ticket.getShow().getMovie().getMovieName());
+            ticketTO.setPrice(ticket.getPrice());
             ticketTO.setTime(ticket.getShow().getStartTime().toString());
             ticketTOList.add(ticketTO);
         }

@@ -22,6 +22,14 @@ public class Ticket {
     @Column
     private boolean boxSeat;
 
+    public Ticket(int id,double price, Show show, User user, boolean boxSeat) {
+        this.ticketId = id;
+        this.price = price;
+        this.show = show;
+        this.user = user;
+        this.boxSeat = boxSeat;
+    }
+
     public Ticket(double price, Show show, User user, boolean boxSeat) {
         this.ticketId = id;
         this.price = price;

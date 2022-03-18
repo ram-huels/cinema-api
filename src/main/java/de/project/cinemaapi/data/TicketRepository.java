@@ -46,9 +46,8 @@ public class TicketRepository {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:kino.db");
             PreparedStatement statement = conn.prepareStatement("DELETE FROM Ticket WHERE T_ID = ?");
             statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
+            statement.executeUpdate();
 
-            rs.close();
             conn.close();
             statement.close();
         } catch (Exception e) {
@@ -67,7 +66,7 @@ public class TicketRepository {
             Ticket ticket = null;
 
             while (rs.next()) {
-                ticket = new Ticket(rs.getDouble("Preis"), showRepository.getShow(rs.getInt("V_ID")), userRepository.getUser(id), intToBoolean(rs.getInt("isLogenplatz")));
+                ticket = new Ticket(rs.getInt("T_ID"),rs.getDouble("Preis"), showRepository.getShow(rs.getInt("V_ID")), userRepository.getUser(id), intToBoolean(rs.getInt("isLogenplatz")));
                 ticketList.add(ticket);
             }
 

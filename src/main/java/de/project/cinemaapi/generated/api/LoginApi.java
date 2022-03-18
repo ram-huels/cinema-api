@@ -5,6 +5,7 @@
  */
 package de.project.cinemaapi.generated.api;
 
+import de.project.cinemaapi.generated.model.LoginResponseTO;
 import de.project.cinemaapi.generated.model.LoginTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,14 +28,14 @@ public interface LoginApi {
 
     @Operation(summary = "Login", description = "Api for the login of user and admin", tags={ "login" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Login was successful", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Boolean.class))),
+        @ApiResponse(responseCode = "200", description = "Login was successful", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponseTO.class))),
         
         @ApiResponse(responseCode = "404", description = "Username or password is wrong") })
     @RequestMapping(value = "/login",
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Boolean> login(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody LoginTO body);
+    ResponseEntity<LoginResponseTO> login(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody LoginTO body);
 
 }
 

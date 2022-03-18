@@ -27,8 +27,8 @@ public class CancelTicketApiController implements CancelTicketApi {
         this.bookingService = bookingService;
     }
 
-    public ResponseEntity<Void> cancelTicketDelete(@Parameter(in = ParameterIn.PATH, description = "Id of the show", required=true, schema=@Schema()) @PathVariable("showId") Integer showId) {
-        this.bookingService.cancelTicket(showId);
+    public ResponseEntity<Void> cancelTicketDelete(@Parameter(in = ParameterIn.PATH, description = "Id of the show", required=true, schema=@Schema()) @PathVariable("ticketId") Integer ticketId) {
+        this.bookingService.cancelTicket(ticketId);
         return ResponseEntity.ok().build();
     }
 

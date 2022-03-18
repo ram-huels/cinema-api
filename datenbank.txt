@@ -1,0 +1,41 @@
+
+CREATE TABLE IF NOT EXISTS `Vorstellungen` (
+	`V_ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`K_ID`	INTEGER,
+	`F_ID`	INTEGER,
+	`is3D`	INTEGER,
+	`Startzeit' varchar(255),
+	CONSTRAINT `FK_K_ID` FOREIGN KEY(`K_ID`) REFERENCES `Kinosaal`(`K_ID`),
+	CONSTRAINT `FK_F_ID` FOREIGN KEY(`F_ID`) REFERENCES `Film`(`F_ID`)
+);
+CREATE TABLE IF NOT EXISTS `Ticket` (
+	`T_ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`Preis`	real,
+	`V_ID`	integer,
+	`B_ID`	integer,
+	`isLogenplatz`	integer,
+	CONSTRAINT `FK_V_ID` FOREIGN KEY(`V_ID`) REFERENCES `Vorstellungen`(`V_ID`),
+	CONSTRAINT `FK_B_ID` FOREIGN KEY(`B_ID`) REFERENCES `Benutzer`(`B_ID`)
+);
+CREATE TABLE IF NOT EXISTS `Kinosaal` (
+	`K_ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`Logenplaetze`	INTEGER,
+	`Parkettplaetze`	INTEGER
+);
+CREATE TABLE IF NOT EXISTS `Film` (
+	`F_ID`	integer PRIMARY KEY AUTOINCREMENT,
+	`Dauer`	real,
+	`Name`	varchar ( 255 )
+);
+CREATE TABLE IF NOT EXISTS `Benutzer` (
+	`B_ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`Benutzername`	varchar ( 255 ),
+	`isAdmin`	integer,
+	`Kennwort`	varchar ( 255 )
+);
+
+INSERT INTO Benutzer(B_ID, Benutzername, Kennwort, isAdmin) VALUES (1, "test@admin.de", "12345", 1);
+INSERT INTO Benutzer(B_ID, Benutzername, Kennwort, isAdmin) VALUES (2, "test@user.de", "12345", 0);
+
+INSERT INTO Kinosaal(K_ID, Logenplaetze, Parkettplaetze) VALUES (1, 30, 70);
+INSERT INTO Kinosaal(K_ID, Logenplaetze, Parkettplaetze) VALUES (2, 20, 50);

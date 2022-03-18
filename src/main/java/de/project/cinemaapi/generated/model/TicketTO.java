@@ -9,12 +9,18 @@ import org.springframework.validation.annotation.Validated;
  * TicketTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-03-10T12:00:26.623Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-03-18T13:26:07.104Z[GMT]")
 
 
 public class TicketTO   {
   @JsonProperty("showId")
   private Integer showId = null;
+
+  @JsonProperty("ticketId")
+  private Integer ticketId = null;
+
+  @JsonProperty("price")
+  private Double price = null;
 
   @JsonProperty("time")
   private String time = null;
@@ -32,13 +38,51 @@ public class TicketTO   {
    * @return showId
    **/
   @Schema(description = "Id of the show")
-  
-    public Integer getShowId() {
+
+  public Integer getShowId() {
     return showId;
   }
 
   public void setShowId(Integer showId) {
     this.showId = showId;
+  }
+
+  public TicketTO ticketId(Integer ticketId) {
+    this.ticketId = ticketId;
+    return this;
+  }
+
+  /**
+   * Id of the ticket
+   * @return ticketId
+   **/
+  @Schema(description = "Id of the ticket")
+
+  public Integer getTicketId() {
+    return ticketId;
+  }
+
+  public void setTicketId(Integer ticketId) {
+    this.ticketId = ticketId;
+  }
+
+  public TicketTO price(Double price) {
+    this.price = price;
+    return this;
+  }
+
+  /**
+   * Price of the ticket
+   * @return price
+   **/
+  @Schema(description = "Price of the ticket")
+
+  public Double getPrice() {
+    return price;
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
   }
 
   public TicketTO time(String time) {
@@ -51,8 +95,8 @@ public class TicketTO   {
    * @return time
    **/
   @Schema(description = "Time the show occurs")
-  
-    public String getTime() {
+
+  public String getTime() {
     return time;
   }
 
@@ -70,8 +114,8 @@ public class TicketTO   {
    * @return moviename
    **/
   @Schema(description = "Name of the movie")
-  
-    public String getMoviename() {
+
+  public String getMoviename() {
     return moviename;
   }
 
@@ -90,21 +134,25 @@ public class TicketTO   {
     }
     TicketTO ticketTO = (TicketTO) o;
     return Objects.equals(this.showId, ticketTO.showId) &&
-        Objects.equals(this.time, ticketTO.time) &&
-        Objects.equals(this.moviename, ticketTO.moviename);
+            Objects.equals(this.ticketId, ticketTO.ticketId) &&
+            Objects.equals(this.price, ticketTO.price) &&
+            Objects.equals(this.time, ticketTO.time) &&
+            Objects.equals(this.moviename, ticketTO.moviename);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(showId, time, moviename);
+    return Objects.hash(showId, ticketId, price, time, moviename);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TicketTO {\n");
-    
+
     sb.append("    showId: ").append(toIndentedString(showId)).append("\n");
+    sb.append("    ticketId: ").append(toIndentedString(ticketId)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("    moviename: ").append(toIndentedString(moviename)).append("\n");
     sb.append("}");

@@ -39,8 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                type: boolean
-                description: Is the user an admin
+                $ref: '#/components/schemas/LoginResponseTO'
         '404':
           description: Username or password is wrong
   /user/{userId}:
@@ -269,6 +268,9 @@ components:
         showId:
           type: integer
           description: Id of the show
+        ticketId:
+          type: integer
+          description: Id of the ticket
         time:
           type: string
           description: Time the show occurs
@@ -361,3 +363,12 @@ components:
         parquetSeats:
           type: integer
           description: Number of parquet seats
+    LoginResponseTO:
+      type: object
+      properties:
+        isAdmin:
+          type: boolean
+          description: Determines the authorization of user
+        isCorrect:
+          type: boolean
+          description: Determines the correctness of login data

@@ -26,9 +26,9 @@ public interface CancelTicketApi {
         @ApiResponse(responseCode = "200", description = "The ticket has been canceled"),
         
         @ApiResponse(responseCode = "404", description = "No ticket has been found for this ticket") })
-    @RequestMapping(value = "/cancelTicket/{showId}",
+    @RequestMapping(value = "/cancelTicket/{ticketId}",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> cancelTicketDelete(@Parameter(in = ParameterIn.PATH, description = "Id of the show", required=true, schema=@Schema()) @PathVariable("showId") Integer showId);
+    ResponseEntity<Void> cancelTicketDelete(@Parameter(in = ParameterIn.PATH, description = "Id of the show", required=true, schema=@Schema()) @PathVariable("ticketId") Integer ticketId);
 
 }
 

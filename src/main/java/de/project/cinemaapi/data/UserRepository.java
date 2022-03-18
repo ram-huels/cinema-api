@@ -36,7 +36,7 @@ public class UserRepository {
         return null;
     }
 
-    public boolean checkLogin(String username, String password) {
+    public User getUserViaLoginInformation(String username, String password) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:kino.db");
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM Benutzer WHERE  Benutzername = ? AND Kennwort = ?");
@@ -54,11 +54,11 @@ public class UserRepository {
             conn.close();
             statement.close();
 
-            return user != null;
+            return user;
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-        return false;
+        return null;
     }
 
     /*
