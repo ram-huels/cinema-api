@@ -372,3 +372,6 @@ components:
         isCorrect:
           type: boolean
           description: Determines the correctness of login data
+        userId:
+          type: integer
+          description: Id of the user

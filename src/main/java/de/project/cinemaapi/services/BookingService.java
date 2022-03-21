@@ -71,11 +71,7 @@ public class BookingService {
 
     private Ticket mapToTicket(TicketPushTO ticketPushTO) {
         Show show = showRepository.getShow(ticketPushTO.getShowId());
-        Ticket ticket = new Ticket();
-        ticket.setShow(show);
-        ticket.setBoxSeat(ticketPushTO.isIsBoxSeat());
-        ticket.setUser(userRepository.getUser(ticketPushTO.getUserId()));
-        ticket.setPrice(this.calculatePrice(ticketPushTO.isWithDiscount(), ticketPushTO.isIsBoxSeat(), show.isIs3D()));
-        return ticket;
+        return new Ticket(this.calculatePrice(ticketPushTO.isWithDiscount(), ticketPushTO.isIsBoxSeat(),
+                show.isIs3D()), show, userRepository.getUser(ticketPushTO.getUserId()), ticketPushTO.isIsBoxSeat());
     }
 }

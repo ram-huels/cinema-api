@@ -19,6 +19,9 @@ public class LoginResponseTO   {
     @JsonProperty("isCorrect")
     private Boolean isCorrect = null;
 
+    @JsonProperty("userId")
+    private Integer userId = null;
+
     public LoginResponseTO isAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
         return this;
@@ -57,6 +60,25 @@ public class LoginResponseTO   {
         this.isCorrect = isCorrect;
     }
 
+    public LoginResponseTO userId(Integer userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    /**
+     * Id of the user
+     * @return userId
+     **/
+    @Schema(description = "Id of the user")
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -68,12 +90,13 @@ public class LoginResponseTO   {
         }
         LoginResponseTO loginResponseTO = (LoginResponseTO) o;
         return Objects.equals(this.isAdmin, loginResponseTO.isAdmin) &&
-                Objects.equals(this.isCorrect, loginResponseTO.isCorrect);
+                Objects.equals(this.isCorrect, loginResponseTO.isCorrect) &&
+                Objects.equals(this.userId, loginResponseTO.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isAdmin, isCorrect);
+        return Objects.hash(isAdmin, isCorrect, userId);
     }
 
     @Override
@@ -83,6 +106,7 @@ public class LoginResponseTO   {
 
         sb.append("    isAdmin: ").append(toIndentedString(isAdmin)).append("\n");
         sb.append("    isCorrect: ").append(toIndentedString(isCorrect)).append("\n");
+        sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -98,3 +122,4 @@ public class LoginResponseTO   {
         return o.toString().replace("\n", "\n    ");
     }
 }
+

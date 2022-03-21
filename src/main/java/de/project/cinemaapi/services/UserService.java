@@ -42,6 +42,7 @@ public class UserService {
         }
         loginResponseTO.setIsCorrect(true);
         loginResponseTO.setIsAdmin(user.isAdmin());
+        loginResponseTO.setUserId(user.getUserId());
         return loginResponseTO;
     }
 
