@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class HomepageService {
             for(int i = 0; i < 7; i++) {
                 LocalDateTime now = LocalDateTime.now().plusDays(i);
                 List<Show> showsOfTheDay = showRepository.getShowsOnTheDay(now, movie.getMovieId());
+                showsOfTheDay.sort(Comparator.comparing(Show::getStartTime));
                 DayTO day = mapToDayTO(showsOfTheDay);
                 allSevenDays.add(day);
             }

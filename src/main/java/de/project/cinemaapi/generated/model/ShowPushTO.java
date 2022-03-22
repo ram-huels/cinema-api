@@ -11,7 +11,6 @@ import javax.validation.Valid;
  * ShowPushTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-03-10T12:00:26.623Z[GMT]")
 
 
 public class ShowPushTO   {
